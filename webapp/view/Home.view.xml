@@ -1,6 +1,55 @@
 <mvc:View controllerName="com.bootcamp.sapui5.providers.controller.Home"
-    xmlns:mvc="sap.ui.core.mvc"
+xmlns:mvc="sap.ui.core.mvc"
+	xmlns:c="sap.ui.core"
     xmlns="sap.m">
+
     <Page id="page" title="{i18n>title}">
+	<Button press="onPress" text="{i18n>textBuscar}" ></Button>
+		<VBox>
+			<Table inset="false" id="SuppliersTable"
+				items="{ 
+					path:'/Suppliers'
+				}" >
+				<columns>
+                <Column>
+						<Text text="{i18n>CompanyName}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>ContactTitle}"/>
+					</Column>
+					
+					<Column >
+                        <Text
+                            text="{i18n>ContactName}"
+                        />
+                    </Column>
+                    <Column>
+                        <Text
+                            text="{i18n>City}"
+                        />
+                    </Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" press="onItemPress" type="Active" >
+						<cells>
+							<ObjectIdentifier 
+								title="{SuppierID}"
+								text="{CompanyName}" />
+							<Text
+                                text="{ContactTitle}"
+                            />
+							<Text
+                                text="{ContactName}"
+                            />
+                            <Text
+                                text="{City}"
+                            />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+
     </Page>
+
 </mvc:View>
