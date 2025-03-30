@@ -1,16 +1,30 @@
 sap.ui.define([
     "com/bootcamp/sapui5/providers/utils/HomeService",
-    ("sap/ui/model/json/JSONModel")
+    "sap/ui/model/json/JSONModel"
 ], function (HomeService, JSONModel) {
     "use strict";
+
     return {
         init: function (oNorthwindModel) {
             this._oNorthwindModel = oNorthwindModel;
         },
-        getDataProviders: async function () {
-            let oFilters = [];
-            return HomeService.readProviders(this._oNorthwindModel, oFilters);
+
+        setInitModelLocalData: function (oComponent) {
+            oComponent.setModel(new JSONModel({
+                valueInput: '',
+                selectedKey: ''
+            }), "LocalDataModel");
         },
+
+        getDataProviders: async function (oFilters) {
+            try {
+                return await HomeService.readProviders(this._oNorthwindModel, oFilters);
+            } catch (error) {
+                console.error("Error al obtener datos de proveedores:", error);
+                return [];
+            }
+        },
+
         setProviderModel: async function (oController, oDatos) {
             let oListModel =
             oController.getOwnerComponent().getModel('ProviderCollection');
@@ -22,7 +36,7 @@ sap.ui.define([
                 oController.getOwnerComponent().getModel('ProviderCollection');
                 }
                 oListModel.setData(oDatos);
-                },
-                
+        },
+           
     };
 });

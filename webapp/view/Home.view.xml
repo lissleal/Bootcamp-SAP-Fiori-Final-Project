@@ -1,55 +1,44 @@
-<mvc:View controllerName="com.bootcamp.sapui5.providers.controller.Home"
-xmlns:mvc="sap.ui.core.mvc"
-	xmlns:c="sap.ui.core"
-    xmlns="sap.m">
+<mvc:View
+    controllerName="com.bootcamp.sapui5.providers.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+    <VBox >
+        <Toolbar>
+            <Label text="{i18n>inputID}" />
+            <Input id="inputID" value="{LocalDataModel>/valueInput}"/>
 
-    <Page id="page" title="{i18n>title}">
-	<Button press="onPress" text="{i18n>textBuscar}" ></Button>
-		<VBox>
-			<Table inset="false" id="SuppliersTable"
-				items="{ 
-					path:'ProviderCollection>/'
-				}" >
-				<columns>
-                <Column>
-						<Text text="{i18n>CompanyName}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>ContactTitle}"/>
-					</Column>
-					
-					<Column >
-                        <Text
-                            text="{i18n>ContactName}"
-                        />
-                    </Column>
-                    <Column>
-                        <Text
-                            text="{i18n>City}"
-                        />
-                    </Column>
-				</columns>
-				<items>
-					<ColumnListItem vAlign="Middle" press="onItemPress" type="Active" >
-						<cells>
-							<ObjectIdentifier 
-								title="{ProviderCollection>SuppierID}"
-								text="{ProviderCollection>CompanyName}" />
-							<Text
-                                text="{ProviderCollection>ContactTitle}"
-                            />
-							<Text
-                                text="{ProviderCollection>ContactName}"
-                            />
-                            <Text
-                                text="{ProviderCollection>City}"
-                            />
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-		</VBox>
-
+            <Label text="{i18n>comboboxID}" />
+            <ComboBox
+                id="comboboxID"
+                selectionChange="onSelectionChange"
+				selectedKey="{LocalDataModel>/selectedKey}"
+                items="{
+					path: '/Suppliers',
+					sorter: { path: 'CompanyName' }
+				}"
+            >
+                <c:Item
+                    key="{CompanyName}"
+                    text="{CompanyName}"
+                />
+            </ComboBox>
+            <Button
+                press="onPress"
+                text="{i18n>textBuscar}"
+            />
+        </Toolbar>
+        </VBox>
+        <VBox>
+           <c:Fragment
+			fragmentName="com.bootcamp.sapui5.providers.view.fragments.SuppliersTable"
+			type="XML"
+			/>
+        </VBox>
     </Page>
-
 </mvc:View>
