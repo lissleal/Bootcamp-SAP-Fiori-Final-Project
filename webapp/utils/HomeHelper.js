@@ -1,14 +1,28 @@
 sap.ui.define([
     "com/bootcamp/sapui5/providers/utils/HomeService",
-], function (HomeService) {
+    ("sap/ui/model/json/JSONModel")
+], function (HomeService, JSONModel) {
     "use strict";
     return {
         init: function (oNorthwindModel) {
             this._oNorthwindModel = oNorthwindModel;
         },
-        getDataProducts: async function () {
+        getDataProviders: async function () {
             let oFilters = [];
-            return HomeService.readProducts(this._oNorthwindModel, oFilters);
-        }
+            return HomeService.readProviders(this._oNorthwindModel, oFilters);
+        },
+        setProviderModel: async function (oController, oDatos) {
+            let oListModel =
+            oController.getOwnerComponent().getModel('ProviderCollection');
+            if(!oListModel){
+                const oModel = new JSONModel([]);
+                oModel.setSizeLimit(1000000);
+                oController.getOwnerComponent().setModel(oModel, "ProviderCollection");
+                oListModel =
+                oController.getOwnerComponent().getModel('ProviderCollection');
+                }
+                oListModel.setData(oDatos);
+                },
+                
     };
 });

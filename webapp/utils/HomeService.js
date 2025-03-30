@@ -2,7 +2,7 @@ sap.ui.define([
 ], function () {
     "use strict";
     return {
-        readProducts: async function (oModel, oFilter) {
+        readProviders: async function (oModel, oFilter) {
             const aRequestsPromises = [
                 new Promise(function (resolve, reject) {
                     oModel.read('/Suppliers', {

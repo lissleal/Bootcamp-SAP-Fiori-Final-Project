@@ -9,8 +9,8 @@ sap.ui.define([
         },
 
         onPress: async function(){
-            let oDatos = await HomeHelper.getDataProducts();
-            console.log(oDatos)
+            let oDatos = await HomeHelper.getDataProviders();
+            await HomeHelper.setProviderModel(this, oDatos[0].results);
         }
     });
 });

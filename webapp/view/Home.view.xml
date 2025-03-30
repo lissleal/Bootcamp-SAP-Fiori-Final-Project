@@ -8,7 +8,7 @@ xmlns:mvc="sap.ui.core.mvc"
 		<VBox>
 			<Table inset="false" id="SuppliersTable"
 				items="{ 
-					path:'/Suppliers'
+					path:'ProviderCollection>/'
 				}" >
 				<columns>
                 <Column>
@@ -33,16 +33,16 @@ xmlns:mvc="sap.ui.core.mvc"
 					<ColumnListItem vAlign="Middle" press="onItemPress" type="Active" >
 						<cells>
 							<ObjectIdentifier 
-								title="{SuppierID}"
-								text="{CompanyName}" />
+								title="{ProviderCollection>SuppierID}"
+								text="{ProviderCollection>CompanyName}" />
 							<Text
-                                text="{ContactTitle}"
+                                text="{ProviderCollection>ContactTitle}"
                             />
 							<Text
-                                text="{ContactName}"
+                                text="{ProviderCollection>ContactName}"
                             />
                             <Text
-                                text="{City}"
+                                text="{ProviderCollection>City}"
                             />
 						</cells>
 					</ColumnListItem>
