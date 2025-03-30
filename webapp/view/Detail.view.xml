@@ -1,0 +1,6 @@
+<mvc:View controllerName="com.bootcamp.sapui5.providers.controller.Detail"
+ xmlns:mvc="sap.ui.core.mvc"
+ xmlns="sap.m">
+ <Page id="pageDetail" title="{i18n>titleDetail}">
+ </Page>
+</mvc:View>
