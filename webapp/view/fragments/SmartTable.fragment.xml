@@ -1,0 +1,33 @@
+<c:FragmentDefinition
+xmlns="sap.m"
+xmlns:c="sap.ui.core"
+xmlns:st="sap.ui.comp.smarttable"
+>
+
+<st:SmartTable
+                id="ST_ORDER_D"
+                entitySet="Products"
+                tableBindingPath="Products"
+                initiallyVisibleFields="ProductID,ProductName,UnitPrice,UnitsInStock"
+                tableType="ResponsiveTable"
+                enableExport="true"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                header="{i18n>Products}"
+                showRowCount="true"
+                showFullScreenButton="true"
+                enableAutoBinding="true"
+                class="sapUiResponsiveContentPadding"
+                enableAutoColumnWidth="true"
+                editTogglable="false"
+            >
+
+                <st:customToolbar >
+                	<OverflowToolbar>
+                        <Button id="btNewProduct" text="{i18n>btnNewProduct}" press="onHandleNewProduct"/>
+            		</OverflowToolbar>
+                </st:customToolbar >
+
+
+            </st:SmartTable>
+</c:FragmentDefinition>

@@ -4,40 +4,44 @@
     xmlns:c="sap.ui.core"
     xmlns="sap.m"
 >
-    <Page
-        id="page"
-    >
-    <VBox >
-        <Toolbar>
-            <Label text="{i18n>inputID}" />
-            <Input id="inputID" value="{LocalDataModel>/valueInput}"/>
-
-            <Label text="{i18n>comboboxID}" />
-            <ComboBox
-                id="comboboxID"
-                selectionChange="onSelectionChange"
-				selectedKey="{LocalDataModel>/selectedKey}"
-                items="{
+    <Page id="page">
+        <VBox>
+            <Toolbar>
+                <VBox>
+                    <Label text="{i18n>inputID}" />
+                    <Input
+                        id="inputID"
+                        value="{LocalDataModel>/valueInput}"
+                    />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>comboboxID}" />
+                    <ComboBox
+                        id="comboboxID"
+                        selectionChange="onSelectionChange"
+                        selectedKey="{LocalDataModel>/selectedKey}"
+                        items="{
 					path: '/Suppliers',
 					sorter: { path: 'CompanyName' }
 				}"
-            >
-                <c:Item
-                    key="{CompanyName}"
-                    text="{CompanyName}"
+                    >
+                        <c:Item
+                            key="{CompanyName}"
+                            text="{CompanyName}"
+                        />
+                    </ComboBox>
+                </VBox>
+                <Button
+                    press="onPress"
+                    text="{i18n>textBuscar}"
                 />
-            </ComboBox>
-            <Button
-                press="onPress"
-                text="{i18n>textBuscar}"
-            />
-        </Toolbar>
+            </Toolbar>
         </VBox>
         <VBox>
-           <c:Fragment
-			fragmentName="com.bootcamp.sapui5.providers.view.fragments.SuppliersTable"
-			type="XML"
-			/>
+            <c:Fragment
+                fragmentName="com.bootcamp.sapui5.providers.view.fragments.SuppliersTable"
+                type="XML"
+            />
         </VBox>
     </Page>
 </mvc:View>

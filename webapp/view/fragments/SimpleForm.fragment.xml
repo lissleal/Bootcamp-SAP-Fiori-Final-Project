@@ -1,0 +1,69 @@
+<c:FragmentDefinition
+xmlns="sap.m"
+xmlns:c="sap.ui.core"
+xmlns:f="sap.ui.layout.form"
+
+>
+<f:SimpleForm
+                id="SimpleFormDisplay354"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                title="{i18n>Information}"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label
+                        id="ld_01"
+                        text="{i18n>CompanyName}"
+                    />
+                    <Text
+                        id="nameText"
+                        text="{CompanyName}"
+                    />
+                    <Label
+                        id="ld_02"
+                        text="{i18n>ContactName}"
+                    />
+                    <Text
+                        id="td_01"
+                        text="{ContactName}"
+                    />
+                    <Label
+                        id="ld_03"
+                        text="{i18n>ContactTitle}"
+                    />
+                    <Text
+                        id="td_03"
+                        text="{ContactTitle}"
+                    />
+                    <Label
+                        id="ld_04"
+                        text="{i18n>Address}"
+                    />
+                    <Text
+                        id="td_04"
+                        text="{Address}"
+                    />
+                    <Label
+                        id="ld_05"
+                        text="{i18n>City}"
+                    />
+                    <Text
+                        id="td_05"
+                        text="{City}"
+                    />
+                </f:content>
+            </f:SimpleForm>
+</c:FragmentDefinition>
