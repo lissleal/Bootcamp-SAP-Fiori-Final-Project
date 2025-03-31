@@ -1,6 +1,7 @@
 <c:FragmentDefinition
 xmlns="sap.m"
-xmlns:c="sap.ui.core">
+xmlns:c="sap.ui.core"
+>
    	 <Table
                 inset="false"
                 id="SuppliersTable"
@@ -8,6 +9,19 @@ xmlns:c="sap.ui.core">
 					path:'ProviderCollection>/'
 				}"
             >
+            <headerToolbar>
+            
+				<OverflowToolbar>
+					<Title text="{i18n>title}" level="H2"/>
+					<ToolbarSpacer/>
+					<Button
+						tooltip="Sort"
+						icon="sap-icon://sort"
+						press="handleSortButtonPressed"/>
+					
+				</OverflowToolbar>
+			</headerToolbar>
+			
                 <columns>
                     <Column>
                         <Text text="{i18n>CompanyName}" />
@@ -31,7 +45,7 @@ xmlns:c="sap.ui.core">
                     >
                         <cells>
                             <ObjectIdentifier
-                                title="{ProviderCollection>SuppierID}"
+                                title="{ProviderCollection>SupplierID}"
                                 text="{ProviderCollection>CompanyName}"
                             />
                             <Text text="{ProviderCollection>ContactTitle}" />

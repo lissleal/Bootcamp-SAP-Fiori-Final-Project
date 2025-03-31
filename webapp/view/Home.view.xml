@@ -6,7 +6,6 @@
 >
     <Page
         id="page"
-        title="{i18n>title}"
     >
     <VBox >
         <Toolbar>
