@@ -1,7 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/Fragment"
-], function (Controller, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/m/MessageToast",
+    "com/bootcamp/sapui5/providers/utils/HomeHelper",
+
+], function (Controller, Fragment, MessageToast, HomeHelper) {
     "use strict";
 
     return Controller.extend("com.bootcamp.sapui5.providers.controller.Detail", {
@@ -9,7 +12,7 @@ sap.ui.define([
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
         },
-
+        //Logica de smarttable
         _onObjectMatched: function (oEvent) {
             let sSupplierID = oEvent.getParameter("arguments").SupplierID;
             this.getView().bindElement({
@@ -19,7 +22,7 @@ sap.ui.define([
                 }
             });
         },
-
+        //Logica de detalle de producto
         onMaterialSelect: function (oEvent) {
             let oSelectedItem = oEvent.getParameter("listItem");
             let oBindingContext = oSelectedItem.getBindingContext();
@@ -55,8 +58,70 @@ sap.ui.define([
             if (this._oDialog) {
                 this._oDialog.close();
             }
-        }
+        },
 
-        
+        //Logica de nuevo producto
+        onHandleNewProduct: function () {
+            if (!this._oNewProductDialog) {
+                Fragment.load({
+                    name: "com.bootcamp.sapui5.providers.view.fragments.NewProductDialog",
+                    controller: this
+                }).then((oDialog) => {
+                    this._oNewProductDialog = oDialog;
+                    this.getView().addDependent(this._oNewProductDialog);
+                    this._clearDialogFields();
+                    this._oNewProductDialog.open();
+                });
+            } else {
+                this._clearDialogFields();
+                this._oNewProductDialog.open();
+            }
+        },
+        _clearDialogFields: function () {
+            sap.ui.getCore().byId("inputProductID").setValue("");
+            sap.ui.getCore().byId("inputProductName").setValue("");
+            sap.ui.getCore().byId("inputUnitPrice").setValue("");
+            sap.ui.getCore().byId("inputUnitsInStock").setValue("");
+        },
+
+        onSaveNewProduct: function () {
+            let values = this.getOwnerComponent().getModel("LocalDataModel").getData()
+            let sProductID = values.inputProductID;
+            let sProductName = values.inputProductName;
+            let fUnitPrice = values.inputUnitPrice;
+            let iUnitsInStock = values.inputUnitsInStock;
+
+            if (!sProductID || !sProductName || isNaN(fUnitPrice) || isNaN(iUnitsInStock) ) {
+                MessageToast.show("Por favor, complete todos los campos correctamente.");
+                return;
+            }
+
+            let oNewProduct = {
+                ProductID: sProductID,
+                ProductName: sProductName,
+                UnitPrice: fUnitPrice,
+                UnitsInStock: iUnitsInStock
+            };
+
+
+            let oModel = this.getView().getModel();
+            oModel.create("/Products", oNewProduct, {
+                success: function () {
+                    MessageToast.show("Producto agregado con éxito");
+                },
+                error: function () {
+                    MessageToast.show("Error al agregar el producto");
+                }
+            });
+
+            this._oNewProductDialog.close();
+        },
+
+        onDialogClose: function () {
+            if (this._oNewProductDialog) {
+                this._oNewProductDialog.close();
+            }
+        },
+
     });
 });

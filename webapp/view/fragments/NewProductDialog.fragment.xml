@@ -16,14 +16,16 @@
                 layout="ColumnLayout"
                 title="Ingrese los datos"
             >
+            <Label text="ID del Producto:" />
+                <Input id="inputProductID" value="{LocalDataModel>/inputProductID}"/>
               <Label text="Nombre del Producto:" />
-                <Input id="inputProductName" />
+                <Input id="inputProductName" value="{LocalDataModel>/inputProductName}"/>
 
                 <Label text="Precio Unitario:" />
-                <Input id="inputUnitPrice" type="Number" />
+                <Input id="inputUnitPrice" type="Number" value="{LocalDataModel>/inputUnitPrice}"/>
 
                 <Label text="Unidades en Stock:" />
-                <Input id="inputUnitsInStock" type="Number" />
+                <Input id="inputUnitsInStock" type="Number" value="{LocalDataModel>/inputUnitsInStock}"/>
                 
             </f:SimpleForm>
         </content>

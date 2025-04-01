@@ -27,7 +27,7 @@ xmlns:st="sap.ui.comp.smarttable"
 
                 <st:customToolbar >
                 	<OverflowToolbar>
-                        <Button id="btNewProduct" text="{i18n>btnNewProduct}" press="onHandleNewProduct"/>
+        <Button text="Agregar Producto" icon="sap-icon://add" press="onHandleNewProduct"/>
             		</OverflowToolbar>
                 </st:customToolbar >
 
