@@ -2,7 +2,10 @@
 xmlns="sap.m"
 xmlns:c="sap.ui.core"
 xmlns:st="sap.ui.comp.smarttable"
+    xmlns:t="sap.ui.table"
+
 >
+
 
 <st:SmartTable
                 id="ST_ORDER_D"
@@ -28,6 +31,11 @@ xmlns:st="sap.ui.comp.smarttable"
             		</OverflowToolbar>
                 </st:customToolbar >
 
-
+<Table
+            id="tableProducts"
+            mode="SingleSelectLeft"
+            selectionChange="onMaterialSelect"
+        >
+        </Table>
             </st:SmartTable>
 </c:FragmentDefinition>

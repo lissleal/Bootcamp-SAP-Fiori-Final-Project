@@ -27,7 +27,6 @@ sap.ui.define([
         onPress: async function () {
             let oFilter = [];
             let values = this.getOwnerComponent().getModel("LocalDataModel").getData()
-            console.log(values)
 
             if (values.valueInput) {
                 oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInput));

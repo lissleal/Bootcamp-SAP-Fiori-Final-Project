@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+         id="DialogMaterial"
+        title="Detalles del Material"
+        stretch="false"
+        afterClose="onDialogClose"
+    >
+        <content>
+            <f:SimpleForm
+               editable="false"
+                layout="ColumnLayout"
+                title="Información del Material"
+            >
+                <f:content>
+                    <Label text="ID:" />
+                <Text id="txtProductID" text="" />
+
+                <Label text="Nombre:" />
+                <Text id="txtProductName" text="" />
+
+                <Label text="Precio Unitario:" />
+                <Text id="txtUnitPrice" text="" />
+
+                <Label text="Unidades en Stock:" />
+                <Text id="txtUnitsInStock" text="" />
+                </f:content>
+                
+            </f:SimpleForm>
+        </content>
+        <buttons>
+            <Button text="Cerrar" press="onDialogClose" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

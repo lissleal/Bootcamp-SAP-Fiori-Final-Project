@@ -5,45 +5,31 @@
     xmlns:core="sap.ui.core"
 >
     <Dialog
-        id="NewItemDialog1"
-        title="{i18n>newItemDialogTitle}"
-        icon="sap-icon://activity-items"
-        busy="false"
-        busyIndicatorDelay="0"
-        class="sapUiSizeCompact"
+         id="DialogNewMaterial"
+        title="NuevoProducto"
+        stretch="false"
+        afterClose="onDialogClose"
     >
         <content>
             <f:SimpleForm
-                editable="true"
-                id="ListForm1"
-                layout="ResponsiveGridLayout"
-                labelSpanXL="4"
-                labelSpanL="4"
-                labelSpanM="4"
-                labelSpanS="4"
-                adjustLabelSpan="false"
-                columnsXL="1"
-                columnsL="1"
-                columnsM="1"
-                singleContainerFullSize="false"
-                width="30rem"
+               editable="true"
+                layout="ColumnLayout"
+                title="Ingrese los datos"
             >
-                <f:content />
+              <Label text="Nombre del Producto:" />
+                <Input id="inputProductName" />
+
+                <Label text="Precio Unitario:" />
+                <Input id="inputUnitPrice" type="Number" />
+
+                <Label text="Unidades en Stock:" />
+                <Input id="inputUnitsInStock" type="Number" />
+                
             </f:SimpleForm>
         </content>
-        <beginButton>
-            <Button
-                visible="true"
-                text="{i18n>newItemDialogCreateBtn}"
-                type="Emphasized"
-                press=".onPressSaveData"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="{i18n>newItemDialogCloseButton}"
-                press=".onCloseAddItemDialog"
-            />
-        </endButton>
+        <buttons>
+                        <Button text="Guardar" type="Accept" press="onSaveNewProduct" />
+            <Button text="Cancelar" type="Reject" press="onDialogClose" />
+        </buttons>
     </Dialog>
 </core:FragmentDefinition>
