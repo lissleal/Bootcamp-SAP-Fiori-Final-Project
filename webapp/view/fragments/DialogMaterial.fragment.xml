@@ -17,16 +17,16 @@
                 title="Información del Material"
             >
                 <f:content>
-                    <Label text="ID:" />
+                    <Label text="ID" />
                 <Text id="txtProductID" text="" />
 
-                <Label text="Nombre:" />
+                <Label text="Nombre" />
                 <Text id="txtProductName" text="" />
 
-                <Label text="Precio Unitario:" />
+                <Label text="Precio Unitario" />
                 <Text id="txtUnitPrice" text="" />
 
-                <Label text="Unidades en Stock:" />
+                <Label text="Unidades en Stock" />
                 <Text id="txtUnitsInStock" text="" />
                 </f:content>
                 

@@ -91,7 +91,6 @@ sap.ui.define([
             }
         },
         _clearDialogFields: function () {
-            sap.ui.getCore().byId("inputProductID").setValue("");
             sap.ui.getCore().byId("inputProductName").setValue("");
             sap.ui.getCore().byId("inputUnitPrice").setValue("");
             sap.ui.getCore().byId("inputUnitsInStock").setValue("");
@@ -100,13 +99,13 @@ sap.ui.define([
         onSaveNewProduct: function () {
             let oLocalModel = this.getView().getModel("LocalDataModel");
             let values = this.getOwnerComponent().getModel("LocalDataModel").getData();
-            let sProductID = values.inputProductID;
-            let sProductName = values.inputProductName;
-            let fUnitPrice = (values.inputUnitPrice);
-            let iUnitsInStock = (values.inputUnitsInStock);
             let aProducts = values.mockProducts;
+            let sProductID = parseInt(aProducts.length + 1);
+            let sProductName = values.inputProductName;
+            let fUnitPrice = parseFloat(values.inputUnitPrice);
+            let iUnitsInStock = parseInt(values.inputUnitsInStock);
 
-            if (!sProductID || !sProductName || isNaN(fUnitPrice) || isNaN(iUnitsInStock)) {
+            if (!sProductName || !fUnitPrice || !iUnitsInStock) {
                 MessageToast.show("Por favor, complete todos los campos correctamente.");
                 return;
             }
