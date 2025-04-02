@@ -20,7 +20,6 @@ xmlns:t="sap.ui.table"
     showRowCount="true"
     showFullScreenButton="true"
     enableAutoBinding="true"
-    class="sapUiResponsiveContentPadding"
     enableAutoColumnWidth="true"
     editTogglable="false"
 >

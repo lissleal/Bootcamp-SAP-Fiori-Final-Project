@@ -6,9 +6,9 @@
 >
     <Page
         id="pageDetail"
-        title="{i18n>titleDetail}"
     >
-        <VBox id="dhb_01">
+        <VBox id="dhb_01"             class="sapUiSmallMargin"
+>
             <core:Fragment
                 fragmentName="com.bootcamp.sapui5.providers.view.fragments.SimpleForm"
                 type="XML"

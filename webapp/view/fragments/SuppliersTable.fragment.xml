@@ -51,6 +51,7 @@ xmlns:c="sap.ui.core"
                             <Text text="{ProviderCollection>ContactTitle}" />
                             <Text text="{ProviderCollection>ContactName}" />
                             <Text text="{ProviderCollection>City}" />
+
                         </cells>
                     </ColumnListItem>
                 </items>

@@ -1,5 +1,6 @@
 <c:FragmentDefinition
 xmlns="sap.m"
+xmlns:l="sap.ui.layout"
 xmlns:c="sap.ui.core"
 xmlns:f="sap.ui.layout.form"
 
@@ -7,23 +8,25 @@ xmlns:f="sap.ui.layout.form"
 <f:SimpleForm
                 id="SimpleFormDisplay354"
                 editable="false"
-                layout="ResponsiveGridLayout"
+                layout="ColumnLayout"
                 title="{i18n>Information}"
-                labelSpanXL="3"
-                labelSpanL="3"
-                labelSpanM="3"
-                labelSpanS="12"
-                adjustLabelSpan="false"
-                emptySpanXL="4"
-                emptySpanL="4"
-                emptySpanM="4"
-                emptySpanS="0"
-                columnsXL="1"
-                columnsL="1"
-                columnsM="1"
-                singleContainerFullSize="false"
+                labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="12"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false"
+            class="sapUiSmallMarginBottom"
             >
                 <f:content>
+
                     <Label
                         id="ld_01"
                         text="{i18n>CompanyName}"
@@ -37,7 +40,7 @@ xmlns:f="sap.ui.layout.form"
                         text="{i18n>ContactName}"
                     />
                     <Text
-                        id="td_01"
+                        id="td_02"
                         text="{ContactName}"
                     />
                     <Label
@@ -49,21 +52,65 @@ xmlns:f="sap.ui.layout.form"
                         text="{ContactTitle}"
                     />
                     <Label
+                        id="ld_10"
+                        text="{i18n>HomePage}"
+                    />
+                    <Text
+                        id="td_10"
+                        text="{HomePage}"
+                    />
+
+                    <Label
                         id="ld_04"
-                        text="{i18n>Address}"
+                        text="{i18n>Region}"
                     />
                     <Text
                         id="td_04"
-                        text="{Address}"
+                        text="{Region}"
                     />
+                    
                     <Label
                         id="ld_05"
-                        text="{i18n>City}"
+                        text="{i18n>Address}"
                     />
                     <Text
                         id="td_05"
+                        text="{Address}"
+                    />
+                    <Label
+                        id="ld_06"
+                        text="{i18n>City}"
+                    />
+                    <Text
+                        id="td_06"
                         text="{City}"
                     />
+                    <Label
+                        id="ld_07"
+                        text="{i18n>PostalCode}"
+                    />
+                    <Text
+                        id="td_07"
+                        text="{PostalCode}"
+                    />
+                    <Label
+                        id="ld_08"
+                        text="{i18n>Phone}"
+                    />
+                    <Text
+                        id="td_08"
+                        text="{Phone}"
+                    />
+                    <Label
+                        id="ld_09"
+                        text="{i18n>Fax}"
+                    />
+                    <Text
+                        id="td_09"
+                        text="{Fax}"
+                    />
+                    
+
                 </f:content>
             </f:SimpleForm>
 </c:FragmentDefinition>
