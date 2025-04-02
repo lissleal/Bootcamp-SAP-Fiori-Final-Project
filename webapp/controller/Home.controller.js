@@ -94,7 +94,23 @@ sap.ui.define([
             aSorters.push(new sap.ui.model.Sorter(sPath, bDescending));
         
             oBinding.sort(aSorters);
+        },
+
+        onClearFilters: function () {
+            let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+        
+            oModel.setProperty("/valueInput", "");
+            oModel.setProperty("/valueName", "");
+            oModel.setProperty("/selectedKey", "");
+        
+            this.byId("inputID").setValue("");
+            this.byId("comboboxID").setSelectedKey("");
+        
+            HomeHelper.getDataProviders([]).then((oDatos) => {
+            HomeHelper.setProviderModel(this, oDatos[0].results);
+            });
         }
+        
         
     });
 });

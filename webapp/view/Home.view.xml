@@ -43,11 +43,21 @@
                     </ComboBox>
                 </VBox>
             </HBox>
+                    <VBox class="sapUiSmallMargin">
+
             <Button
                 press="onPress"
                 text="{i18n>textBuscar}"
                 class="sapUiSmallMarginTop"
             />
+            <Button
+    press="onClearFilters"
+    text="{i18n>textLimpiar}"
+    class="sapUiSmallMarginTop"
+/>
+        </VBox>
+
+
         </HBox>
 
         <VBox class="sapUiSmallMargin">
