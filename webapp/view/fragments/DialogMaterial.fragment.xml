@@ -33,7 +33,7 @@
             </f:SimpleForm>
         </content>
         <buttons>
-            <Button text="Cerrar" press="onDialogClose" />
+            <Button text="Cerrar" press="onDialogMaterialClose" />
         </buttons>
     </Dialog>
 </core:FragmentDefinition>

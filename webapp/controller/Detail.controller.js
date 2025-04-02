@@ -67,7 +67,7 @@ sap.ui.define([
             sap.ui.getCore().byId("txtUnitsInStock").setText(oData.UnitsInStock);
         },
 
-        onDialogClose: function () {
+        onDialogMaterialClose: function () {
             if (this._oDialog) {
                 this._oDialog.close();
             }
