@@ -24,9 +24,35 @@ sap.ui.define([
             }.bind(this));
         },
 
+            onSuggestionItemSelected: function (oEvent) {
+                let oSelectedItem = oEvent.getParameter("selectedItem");
+            
+                if (oSelectedItem) {
+                    let sSupplierName = oSelectedItem.getText(); 
+                    let sSupplierID = oSelectedItem.getAdditionalText(); 
+                    
+                    let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+                    oModel.setProperty("/valueInput", sSupplierID);
+                    oModel.setProperty("/valueName", sSupplierName);
+                }
+            },
+
+            onSelectionChange(oEvent){
+                let oSelectedItem = oEvent.getParameter("selectedItem");
+            
+                if (oSelectedItem) {
+                    let sSupplierCity = oSelectedItem.getText(); 
+                    
+                    let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+                    oModel.setProperty("/selectedKey", sSupplierCity);
+            }
+        },
+            
+
         onPress: async function () {
             let oFilter = [];
             let values = this.getOwnerComponent().getModel("LocalDataModel").getData()
+            console.log("values.valueInput")
 
             if (values.valueInput) {
                 oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInput));
@@ -35,7 +61,7 @@ sap.ui.define([
                 oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueName));
             }
             if (values.selectedKey) {
-                oFilter.push(new Filter("Country", FilterOperator.EQ, values.selectedKey));
+                oFilter.push(new Filter("City", FilterOperator.EQ, values.selectedKey));
             }
             
             let oDatos = await HomeHelper.getDataProviders(oFilter);

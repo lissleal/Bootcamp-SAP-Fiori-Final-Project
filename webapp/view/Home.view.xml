@@ -11,30 +11,34 @@
                     <Label text="{i18n>inputID}" />
                     <Input
                         id="inputID"
-                        value="{LocalDataModel>/valueInput}"
-                    />
-                </VBox>
-                <VBox class="sapUiSmallMarginEnd">
-                    <Label text="{i18n>inputName}" />
-                    <Input
-                        id="inputName"
-                        value="{LocalDataModel>/valueName}"
-                    />
+                        showSuggestion="true"
+                        suggestionItems="{/Suppliers}"
+                        suggestionItemSelected="onSuggestionItemSelected"
+                    >
+                        <suggestionItems
+                        >
+                            <c:ListItem
+                                additionalText="{SupplierID}"
+                                text="{CompanyName}"         
+                            />
+                        </suggestionItems>
+                    </Input>
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>comboboxID}" />
                     <ComboBox
                         id="comboboxID"
                         selectionChange="onSelectionChange"
-                        selectedKey="{LocalDataModel>/selectedKey}"
                         items="{
 					path: '/Suppliers',
-					sorter: { path: 'Country' }
+					sorter: { path: 'Country',
+                    group:true
+                     }
 				}"
                     >
                         <c:Item
                             key="{Country}"
-                            text="{Country}"
+                            text="{City}"
                         />
                     </ComboBox>
                 </VBox>
@@ -43,7 +47,7 @@
                 press="onPress"
                 text="{i18n>textBuscar}"
                 class="sapUiSmallMarginTop"
-            />            
+            />
         </HBox>
 
         <VBox class="sapUiSmallMargin">
