@@ -17,6 +17,7 @@ sap.ui.define([
                 inputProductName: '',
                 inputUnitPrice: '',
                 inputUnitsInStock: '',
+                mockProducts: [],
             }), "LocalDataModel");
         },
 

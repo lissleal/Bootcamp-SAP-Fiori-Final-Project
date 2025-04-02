@@ -21,7 +21,20 @@ sap.ui.define([
                     expand: "Products"
                 }
             });
+
+            let oModel = this.getView().getModel();
+            let oLocalModel = this.getView().getModel("LocalDataModel");
+            oModel.read(`/Suppliers(${sSupplierID})/Products`, {
+                success: (oData) => {
+                    oLocalModel.setProperty("/mockProducts", oData.results);
+                },
+                error: function () {
+                    MessageToast.show("Error al obtener productos.");
+                }
+            });
+
         },
+
         //Logica de detalle de producto
         onMaterialSelect: function (oEvent) {
             let oSelectedItem = oEvent.getParameter("listItem");
@@ -85,13 +98,15 @@ sap.ui.define([
         },
 
         onSaveNewProduct: function () {
-            let values = this.getOwnerComponent().getModel("LocalDataModel").getData()
+            let oLocalModel = this.getView().getModel("LocalDataModel");
+            let values = this.getOwnerComponent().getModel("LocalDataModel").getData();
             let sProductID = values.inputProductID;
             let sProductName = values.inputProductName;
-            let fUnitPrice = values.inputUnitPrice;
-            let iUnitsInStock = values.inputUnitsInStock;
+            let fUnitPrice = (values.inputUnitPrice);
+            let iUnitsInStock = (values.inputUnitsInStock);
+            let aProducts = values.mockProducts;
 
-            if (!sProductID || !sProductName || isNaN(fUnitPrice) || isNaN(iUnitsInStock) ) {
+            if (!sProductID || !sProductName || isNaN(fUnitPrice) || isNaN(iUnitsInStock)) {
                 MessageToast.show("Por favor, complete todos los campos correctamente.");
                 return;
             }
@@ -103,18 +118,25 @@ sap.ui.define([
                 UnitsInStock: iUnitsInStock
             };
 
+            aProducts.push(oNewProduct);
+            oLocalModel.setProperty("/mockProducts", aProducts);
 
-            let oModel = this.getView().getModel();
-            oModel.create("/Products", oNewProduct, {
-                success: function () {
-                    MessageToast.show("Producto agregado con éxito");
-                },
-                error: function () {
-                    MessageToast.show("Error al agregar el producto");
-                }
-            });
+            let oSmartTable = this.getView().byId("ST_ORDER_D");
 
+            if (oSmartTable) {
+                oSmartTable.setModel(oLocalModel);
+                oSmartTable.setTableBindingPath("/mockProducts");
+                oSmartTable.rebindTable();
+            } 
+            
+            let oTable = this.getView().byId("tableProducts");
+            if (oTable) {
+                oTable.getBinding("items").refresh();
+            }
+                        
+            MessageToast.show("Producto agregado con éxito");
             this._oNewProductDialog.close();
+
         },
 
         onDialogClose: function () {
