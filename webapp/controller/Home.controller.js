@@ -31,9 +31,13 @@ sap.ui.define([
             if (values.valueInput) {
                 oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInput));
             }
-            if (values.selectedKey) {
-                oFilter.push(new Filter("CompanyName", FilterOperator.EQ, values.selectedKey));
+            if (values.valueName) {
+                oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueName));
             }
+            if (values.selectedKey) {
+                oFilter.push(new Filter("Country", FilterOperator.EQ, values.selectedKey));
+            }
+            
             let oDatos = await HomeHelper.getDataProviders(oFilter);
             await HomeHelper.setProviderModel(this, oDatos[0].results);
         },

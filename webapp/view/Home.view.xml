@@ -5,16 +5,23 @@
     xmlns="sap.m"
 >
     <Page id="page">
-        <VBox>
-            <Toolbar>
-                <VBox>
+        <HBox class="sapUiSmallMargin">
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>inputID}" />
                     <Input
                         id="inputID"
                         value="{LocalDataModel>/valueInput}"
                     />
                 </VBox>
-                <VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>inputName}" />
+                    <Input
+                        id="inputName"
+                        value="{LocalDataModel>/valueName}"
+                    />
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>comboboxID}" />
                     <ComboBox
                         id="comboboxID"
@@ -22,22 +29,24 @@
                         selectedKey="{LocalDataModel>/selectedKey}"
                         items="{
 					path: '/Suppliers',
-					sorter: { path: 'CompanyName' }
+					sorter: { path: 'Country' }
 				}"
                     >
                         <c:Item
-                            key="{CompanyName}"
-                            text="{CompanyName}"
+                            key="{Country}"
+                            text="{Country}"
                         />
                     </ComboBox>
                 </VBox>
-                <Button
-                    press="onPress"
-                    text="{i18n>textBuscar}"
-                />
-            </Toolbar>
-        </VBox>
-        <VBox>
+            </HBox>
+            <Button
+                press="onPress"
+                text="{i18n>textBuscar}"
+                class="sapUiSmallMarginTop"
+            />            
+        </HBox>
+
+        <VBox class="sapUiSmallMargin">
             <c:Fragment
                 fragmentName="com.bootcamp.sapui5.providers.view.fragments.SuppliersTable"
                 type="XML"
