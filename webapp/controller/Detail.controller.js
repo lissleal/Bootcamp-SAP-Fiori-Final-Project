@@ -24,12 +24,22 @@ sap.ui.define([
 
             let oModel = this.getView().getModel();
             let oLocalModel = this.getView().getModel("LocalDataModel");
+
             oModel.read(`/Suppliers(${sSupplierID})/Products`, {
                 success: (oData) => {
                     oLocalModel.setProperty("/mockProducts", oData.results);
                 },
                 error: function () {
                     MessageToast.show("Error al obtener productos.");
+                }
+            });
+
+            oModel.read("/Categories", {
+                success: (oData) => {
+                    oLocalModel.setProperty("/categories", oData.results);
+                },
+                error: function () {
+                    MessageToast.show("Error al obtener categorías.");
                 }
             });
 
@@ -61,10 +71,20 @@ sap.ui.define([
         },
 
         _setDialogData: function (oData) {
+            let oLocalModel = this.getView().getModel("LocalDataModel");
+
             sap.ui.getCore().byId("txtProductID").setText(oData.ProductID);
             sap.ui.getCore().byId("txtProductName").setText(oData.ProductName);
             sap.ui.getCore().byId("txtUnitPrice").setText(oData.UnitPrice);
             sap.ui.getCore().byId("txtUnitsInStock").setText(oData.UnitsInStock);
+            sap.ui.getCore().byId("txtUnitsOnOrder").setText(oData.UnitsOnOrder);
+            sap.ui.getCore().byId("txtQperUnit").setText(oData.txtQperUnit);
+
+            
+            let aCategories = oLocalModel.getProperty("/categories")
+            let oCategory = aCategories.find(cat => cat.CategoryID === oData.CategoryID);
+            let sCategoryName = oCategory.CategoryName;
+            sap.ui.getCore().byId("txtCategory").setText(sCategoryName);
         },
 
         onDialogMaterialClose: function () {
@@ -94,6 +114,9 @@ sap.ui.define([
             sap.ui.getCore().byId("inputProductName").setValue("");
             sap.ui.getCore().byId("inputUnitPrice").setValue("");
             sap.ui.getCore().byId("inputUnitsInStock").setValue("");
+            sap.ui.getCore().byId("txtCategory").setValue("");
+            sap.ui.getCore().byId("txtQperUnit").setValue("");
+            sap.ui.getCore().byId("txtUnitsOnOrder").setValue("");
         },
 
         onSaveNewProduct: function () {

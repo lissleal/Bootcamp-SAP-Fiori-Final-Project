@@ -23,11 +23,20 @@
                 <Label text="Nombre" />
                 <Text id="txtProductName" text="" />
 
+                <Label text="Categoría" />
+                <Text id="txtCategory" text="" />
+
+                <Label text="Cantidad por Unidad" />
+                <Text id="txtQperUnit" text="" />
+
                 <Label text="Precio Unitario" />
                 <Text id="txtUnitPrice" text="" />
 
                 <Label text="Unidades en Stock" />
                 <Text id="txtUnitsInStock" text="" />
+
+                <Label text="Unidades en Order" />
+                <Text id="txtUnitsOnOrder" text="" />
                 </f:content>
                 
             </f:SimpleForm>

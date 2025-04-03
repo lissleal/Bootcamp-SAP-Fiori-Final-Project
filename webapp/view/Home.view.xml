@@ -57,8 +57,6 @@
 />
         </HBox>
 
-
-
         <VBox class="sapUiSmallMargin">
             <c:Fragment
                 fragmentName="com.bootcamp.sapui5.providers.view.fragments.SuppliersTable"
