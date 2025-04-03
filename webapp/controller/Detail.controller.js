@@ -28,6 +28,7 @@ sap.ui.define([
             oModel.read(`/Suppliers(${sSupplierID})/Products`, {
                 success: (oData) => {
                     oLocalModel.setProperty("/mockProducts", oData.results);
+                    oLocalModel.refresh(true);
                 },
                 error: function () {
                     MessageToast.show("Error al obtener productos.");
@@ -37,6 +38,7 @@ sap.ui.define([
             oModel.read("/Categories", {
                 success: (oData) => {
                     oLocalModel.setProperty("/categories", oData.results);
+                    oLocalModel.refresh(true);
                 },
                 error: function () {
                     MessageToast.show("Error al obtener categorías.");
@@ -78,13 +80,15 @@ sap.ui.define([
             sap.ui.getCore().byId("txtUnitPrice").setText(oData.UnitPrice);
             sap.ui.getCore().byId("txtUnitsInStock").setText(oData.UnitsInStock);
             sap.ui.getCore().byId("txtUnitsOnOrder").setText(oData.UnitsOnOrder);
-            sap.ui.getCore().byId("txtQperUnit").setText(oData.txtQperUnit);
+            sap.ui.getCore().byId("txtQperUnit").setText(oData.QuantityPerUnit);
 
-            
+
             let aCategories = oLocalModel.getProperty("/categories")
             let oCategory = aCategories.find(cat => cat.CategoryID === oData.CategoryID);
             let sCategoryName = oCategory.CategoryName;
+
             sap.ui.getCore().byId("txtCategory").setText(sCategoryName);
+            oLocalModel.refresh(true);
         },
 
         onDialogMaterialClose: function () {
@@ -102,8 +106,8 @@ sap.ui.define([
                 }).then((oDialog) => {
                     this._oNewProductDialog = oDialog;
                     this.getView().addDependent(this._oNewProductDialog);
-                    this._clearDialogFields();
                     this._oNewProductDialog.open();
+                    this._clearDialogFields();
                 });
             } else {
                 this._clearDialogFields();
@@ -114,48 +118,68 @@ sap.ui.define([
             sap.ui.getCore().byId("inputProductName").setValue("");
             sap.ui.getCore().byId("inputUnitPrice").setValue("");
             sap.ui.getCore().byId("inputUnitsInStock").setValue("");
-            sap.ui.getCore().byId("txtCategory").setValue("");
-            sap.ui.getCore().byId("txtQperUnit").setValue("");
-            sap.ui.getCore().byId("txtUnitsOnOrder").setValue("");
+            sap.ui.getCore().byId("inputQperUnit").setValue("");
+            sap.ui.getCore().byId("inputUnitsOnOrder").setValue("");
+        },
+
+        onSelectionChange(oEvent) {
+            let oSelectedItem = oEvent.getParameter("selectedItem");
+
+            if (oSelectedItem) {
+                let sProductCategory = oSelectedItem.getText();
+                let sCategoryID = oSelectedItem.getKey();
+                let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+                oModel.setProperty("/inputCategory", sProductCategory);
+                oModel.setProperty("/inputCategoryID", parseInt(sCategoryID));
+            }
         },
 
         onSaveNewProduct: function () {
             let oLocalModel = this.getView().getModel("LocalDataModel");
-            let values = this.getOwnerComponent().getModel("LocalDataModel").getData();
+            let values = oLocalModel.getData();
             let aProducts = values.mockProducts;
-            let sProductID = parseInt(aProducts.length + 1);
+            let sProductID = aProducts.length > 0 ? Math.max(...aProducts.map(p => p.ProductID)) + 1 : 1;
             let sProductName = values.inputProductName;
+            let sProductCategory = values.inputCategory;
+            let sCategoryID = values.inputCategoryID;
             let fUnitPrice = parseFloat(values.inputUnitPrice);
             let iUnitsInStock = parseInt(values.inputUnitsInStock);
+            let iUnitsOnOrder = parseInt(values.inputUnitsOnOrder);
+            let sQperUnit = values.inputQperUnit;
 
-            if (!sProductName || !fUnitPrice || !iUnitsInStock) {
-                MessageToast.show("Por favor, complete todos los campos correctamente.");
-                return;
-            }
+         if (!sProductName  || isNaN(fUnitPrice) || !fUnitPrice || isNaN(iUnitsInStock) || !iUnitsInStock || !sQperUnit  || isNaN(iUnitsOnOrder) || isNaN(iUnitsOnOrder)) {
+             MessageToast.show("Por favor, complete todos los campos correctamente.");
+             return;
+         }
 
             let oNewProduct = {
                 ProductID: sProductID,
                 ProductName: sProductName,
                 UnitPrice: fUnitPrice,
-                UnitsInStock: iUnitsInStock
+                UnitsInStock: iUnitsInStock,
+                UnitsOnOrder: iUnitsOnOrder,
+                QuantityPerUnit: sQperUnit,
+                CategoryName: sProductCategory,
+                CategoryID: sCategoryID
             };
+
 
             aProducts.push(oNewProduct);
             oLocalModel.setProperty("/mockProducts", aProducts);
+            oLocalModel.refresh(true);
 
             let oSmartTable = this.getView().byId("ST_ORDER_D");
-
             if (oSmartTable) {
                 oSmartTable.setModel(oLocalModel);
                 oSmartTable.setTableBindingPath("/mockProducts");
                 oSmartTable.rebindTable();
-            } 
-            
+            }
+
             let oTable = this.getView().byId("tableProducts");
             if (oTable) {
                 oTable.getBinding("items").refresh();
             }
-                        
+
             MessageToast.show("Producto agregado con éxito");
             this._oNewProductDialog.close();
 

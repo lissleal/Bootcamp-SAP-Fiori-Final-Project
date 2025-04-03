@@ -6,7 +6,6 @@ xmlns:t="sap.ui.table"
 
 >
 
-
 <st:SmartTable
     id="ST_ORDER_D"
     entitySet="Products"

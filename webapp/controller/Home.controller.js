@@ -16,7 +16,7 @@ sap.ui.define([
 
             Fragment.load({
                 id: this.getView().getId(),
-                name: "com.bootcamp.sapui5.providers.view.fragments.SortDialog", 
+                name: "com.bootcamp.sapui5.providers.view.fragments.SortDialog",
                 controller: this
             }).then(function (oDialog) {
                 this._mViewSettingsDialogs["SortDialog"] = oDialog;
@@ -24,30 +24,30 @@ sap.ui.define([
             }.bind(this));
         },
 
-            onSuggestionItemSelected: function (oEvent) {
-                let oSelectedItem = oEvent.getParameter("selectedItem");
-            
-                if (oSelectedItem) {
-                    let sSupplierName = oSelectedItem.getText(); 
-                    let sSupplierID = oSelectedItem.getAdditionalText(); 
-                    
-                    let oModel = this.getOwnerComponent().getModel("LocalDataModel");
-                    oModel.setProperty("/valueInput", sSupplierID);
-                    oModel.setProperty("/valueName", sSupplierName);
-                }
-            },
+        onSuggestionItemSelected: function (oEvent) {
+            let oSelectedItem = oEvent.getParameter("selectedItem");
 
-            onSelectionChange(oEvent){
-                let oSelectedItem = oEvent.getParameter("selectedItem");
-            
-                if (oSelectedItem) {
-                    let sSupplierCity = oSelectedItem.getText(); 
-                    
-                    let oModel = this.getOwnerComponent().getModel("LocalDataModel");
-                    oModel.setProperty("/selectedKey", sSupplierCity);
+            if (oSelectedItem) {
+                let sSupplierName = oSelectedItem.getText();
+                let sSupplierID = oSelectedItem.getAdditionalText();
+
+                let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+                oModel.setProperty("/valueInput", sSupplierID);
+                oModel.setProperty("/valueName", sSupplierName);
             }
         },
-            
+
+        onSelectionChange(oEvent) {
+            let oSelectedItem = oEvent.getParameter("selectedItem");
+
+            if (oSelectedItem) {
+                let sSupplierCity = oSelectedItem.getText();
+
+                let oModel = this.getOwnerComponent().getModel("LocalDataModel");
+                oModel.setProperty("/selectedKey", sSupplierCity);
+            }
+        },
+
 
         onPress: async function () {
             let oFilter = [];
@@ -63,7 +63,7 @@ sap.ui.define([
             if (values.selectedKey) {
                 oFilter.push(new Filter("City", FilterOperator.EQ, values.selectedKey));
             }
-            
+
             let oDatos = await HomeHelper.getDataProviders(oFilter);
             await HomeHelper.setProviderModel(this, oDatos[0].results);
         },
@@ -84,33 +84,33 @@ sap.ui.define([
         },
 
         handleSortDialogConfirm: function (oEvent) {
-            let oTable = this.byId("SuppliersTable"), 
+            let oTable = this.byId("SuppliersTable"),
                 mParams = oEvent.getParameters(),
                 oBinding = oTable.getBinding("items"),
                 aSorters = [];
-        
+
             let sPath = mParams.sortItem.getKey();
             let bDescending = mParams.sortDescending;
             aSorters.push(new sap.ui.model.Sorter(sPath, bDescending));
-        
+
             oBinding.sort(aSorters);
         },
 
         onClearFilters: function () {
             let oModel = this.getOwnerComponent().getModel("LocalDataModel");
-        
+
             oModel.setProperty("/valueInput", "");
             oModel.setProperty("/valueName", "");
             oModel.setProperty("/selectedKey", "");
-        
+
             this.byId("inputID").setValue("");
             this.byId("comboboxID").setSelectedKey("");
-        
+
             HomeHelper.getDataProviders([]).then((oDatos) => {
-            HomeHelper.setProviderModel(this, oDatos[0].results);
+                HomeHelper.setProviderModel(this, oDatos[0].results);
             });
         }
-        
-        
+
+
     });
 });

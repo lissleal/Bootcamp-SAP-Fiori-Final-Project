@@ -29,11 +29,39 @@
                     value="{LocalDataModel>/inputUnitPrice}"
                 />
 
+                    <Label text="{i18n>combobox2ID}" />
+                    <ComboBox
+                        id="combobox2ID"
+                        selectionChange="onSelectionChange"
+                        items="{
+					path: '/Categories',
+					sorter: { path: 'CategoryName'                     }
+				}"
+                    >
+                        <core:Item
+                            key="{CategoryID}"
+                            text="{CategoryName}"
+                        />
+                    </ComboBox>
+
                 <Label text="Unidades en Stock" />
                 <Input
                     id="inputUnitsInStock"
                     type="Number"
                     value="{LocalDataModel>/inputUnitsInStock}"
+                />
+
+                <Label text="Cantidad por Unidad" />
+                <Input
+                    id="inputQperUnit"
+                    value="{LocalDataModel>/inputQperUnit}"
+                />
+
+                <Label text="Unidades en Orden" />
+                <Input
+                    id="inputUnitsOnOrder"
+                    type="Number"
+                    value="{LocalDataModel>/inputUnitsOnOrder}"
                 />
             </f:SimpleForm>
         </content>
