@@ -6,7 +6,7 @@
 >
     <Dialog
         id="DialogNewMaterial"
-        title="NuevoProducto"
+        title="{i18n>NewProduct}"
         stretch="false"
         afterClose="onDialogClose"
     >
@@ -14,22 +14,22 @@
             <f:SimpleForm
                 editable="true"
                 layout="ColumnLayout"
-                title="Ingrese los datos"
+                title="{i18n>textInputData}"
             >
-                <Label text="Nombre del Producto" />
+                <Label text="{i18n>textProductName}" />
                 <Input
                     id="inputProductName"
                     value="{LocalDataModel>/inputProductName}"
                 />
 
-                <Label text="Precio Unitario" />
+                <Label text="{i18n>textUnitPrice}" />
                 <Input
                     id="inputUnitPrice"
                     type="Number"
                     value="{LocalDataModel>/inputUnitPrice}"
                 />
 
-                    <Label text="{i18n>combobox2ID}" />
+                    <Label text="{i18n>textMaterialCategory}" />
                     <ComboBox
                         id="combobox2ID"
                         selectionChange="onSelectionChange"
@@ -44,20 +44,20 @@
                         />
                     </ComboBox>
 
-                <Label text="Unidades en Stock" />
+                <Label text="{i18n>TextUnitsInStock}" />
                 <Input
                     id="inputUnitsInStock"
                     type="Number"
                     value="{LocalDataModel>/inputUnitsInStock}"
                 />
 
-                <Label text="Cantidad por Unidad" />
+                <Label text="{i18n>textQtyPerUnit}" />
                 <Input
                     id="inputQperUnit"
                     value="{LocalDataModel>/inputQperUnit}"
                 />
 
-                <Label text="Unidades en Orden" />
+                <Label text="{i18n>textUnitsOnOrder}" />
                 <Input
                     id="inputUnitsOnOrder"
                     type="Number"
@@ -67,12 +67,12 @@
         </content>
         <buttons>
             <Button
-                text="Guardar"
+                text="{i18n>btnSave}"
                 type="Accept"
                 press="onSaveNewProduct"
             />
             <Button
-                text="Cancelar"
+                text="{i18n>btnCancel}"
                 type="Reject"
                 press="onDialogClose"
             />

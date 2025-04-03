@@ -12,7 +12,7 @@ sap.ui.define([
         onInit() {
             this.oRouter = this.getOwnerComponent().getRouter();
 
-            this._mViewSettingsDialogs = {}; // Objeto para almacenar los diálogos
+            this._mViewSettingsDialogs = {}; 
 
             Fragment.load({
                 id: this.getView().getId(),
@@ -22,6 +22,13 @@ sap.ui.define([
                 this._mViewSettingsDialogs["SortDialog"] = oDialog;
                 this.getView().addDependent(oDialog);
             }.bind(this));
+
+            this.loadInitialData();  
+        },
+
+        loadInitialData: async function () {
+            let oDatos = await HomeHelper.getDataProviders([]);
+            await HomeHelper.setProviderModel(this, oDatos[0].results);
         },
 
         onSuggestionItemSelected: function (oEvent) {
@@ -52,7 +59,6 @@ sap.ui.define([
         onPress: async function () {
             let oFilter = [];
             let values = this.getOwnerComponent().getModel("LocalDataModel").getData()
-            console.log("values.valueInput")
 
             if (values.valueInput) {
                 oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInput));

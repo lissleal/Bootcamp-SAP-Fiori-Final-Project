@@ -4,7 +4,7 @@
     xmlns:c="sap.ui.core"
     xmlns="sap.m"
 >
-    <Page id="page">
+    <Page id="page" >
         <HBox class="sapUiSmallMargin">
             <HBox>
                 <VBox class="sapUiSmallMarginEnd">

@@ -25,7 +25,7 @@ xmlns:t="sap.ui.table"
 
                 <st:customToolbar >
                 	<OverflowToolbar>
-        <Button text="Agregar Producto" icon="sap-icon://add" press="onHandleNewProduct"/>
+        <Button text="{i18n>btnNewProduct}" press="onHandleNewProduct" type="Emphasized"/>
             		</OverflowToolbar>
                 </st:customToolbar >
 
